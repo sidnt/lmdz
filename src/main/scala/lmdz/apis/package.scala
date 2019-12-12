@@ -7,13 +7,13 @@ import org.lmdbjava._
 
 /** lmdz imports */
 import cfgs._
-import LmdbBatteryPackAccessors._
+import LmdzBatteryPackAccessors._
 
 package object apis {
 
   /** lmdbjava creates the environment directory if it's not there
    * this api returns a ready to use lmdb-env & lmdb-dbi ootb */
-  val createOrOpenDefaultEnvAndDbi: RIO[LmdbBatteryPack, (Env[ByteBuffer], Dbi[ByteBuffer])] = for {
+  val createOrOpenDefaultEnvAndDbi: RIO[LmdzBatteryPack, (Env[ByteBuffer], Dbi[ByteBuffer])] = for {
     defaultEnvPath  <-  DefaultEnvPath
     defaultEnvSize  <-  DefaultEnvMiBs
     defaultEnvFlag  <-  DefaultEnvFlag
