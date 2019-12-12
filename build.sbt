@@ -11,3 +11,12 @@ lazy val lmdz = (project in file("."))
       lmdb4j
     )
   )
+
+lazy val lmdzclient0 = (project in file("lmdzclient0"))
+  .dependsOn(lmdz)
+  .settings(
+    name := "lmdzclient0",
+    libraryDependencies ++= Seq(
+      zio
+    )
+  )
