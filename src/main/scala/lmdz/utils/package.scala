@@ -12,13 +12,13 @@ package object utils {
   /** we need the ability of interconversion between
    * runtime objects <-> database objects */
 
-  /**where will be dbb allocated? in the method's stack?
+  /** #doubt where will be dbb allocated? in the method's stack?
    * will it need GC later? Or will it be wiped after this method returns? */
   def byteArrayToDByteBuffer(ba: Array[Byte]): ByteBuffer = {
     val dbb: ByteBuffer = ByteBuffer.allocateDirect(ba.length).put(ba)
     dbb.flip()
     dbb
-    /** is ↑ concurrent safe?
+    /** #doubt is ↑ concurrent safe?
      * seems so, because it doesn't access any value outside itself
      * even if it mutates something `dbb.flip()` the values affected are local to the method
      * each executing instance will have its own copy

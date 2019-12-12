@@ -8,7 +8,7 @@ import org.lmdbjava.{Dbi, Txn}
 object crud {
 
   /** crud apis don't yet abstract over lmdbjava's buffer type
-   * these are currently hardcoded to ByteBuffer
+   * these are currently #hardcoded to ByteBuffer
    * #todo we'll need appropriate type bounds to introduce that type parameter */
 
   /** Dbi.put() internally begins and commits a transaction (Txn). */
