@@ -6,7 +6,7 @@ import lmdz.cfgs.LmdzBatteryPack
 import zio._
 import zio.console.Console
 
-package object lmdzclient0 {
+package object lmdzclient {
 
   val app0: ZIO[Console with LmdzBatteryPack, Throwable, Unit] = for {
     (env,dbi)     <-      openDefaultEnvAndDbi
