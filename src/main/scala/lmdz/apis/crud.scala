@@ -18,7 +18,7 @@ object crud {
   def get(atKey:ByteBuffer, fromDbi:Dbi[ByteBuffer], within:Txn[ByteBuffer]): Task[ByteBuffer] =
     IO.effect(fromDbi.get(within, atKey))
 
-  def del(fromDbi:Dbi[ByteBuffer], atKey:ByteBuffer): Task[Boolean] =
+  def delete(fromDbi:Dbi[ByteBuffer], atKey:ByteBuffer): Task[Boolean] =
     IO.effect(fromDbi.delete(atKey))
 
 }
