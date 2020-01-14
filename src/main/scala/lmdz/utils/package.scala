@@ -29,9 +29,4 @@ package object utils {
   def stringToUtf8DByteBuffer(s:String): ByteBuffer = byteArrayToDByteBuffer(s.getBytes(UTF_8))
   def dByteBufferToUtf8String(bb:ByteBuffer): String = UTF_8.decode(bb).toString
 
-  /** console conveniences */
-  val gsl: ZIO[Console, IOException, String] = getStrLn
-  val psl: String => URIO[Console, Unit] = (s:String)  =>  putStrLn(s)
-  val ps: String => URIO[Console, Unit] = (s:String)  =>  putStr(s)
-
 }
