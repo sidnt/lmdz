@@ -51,7 +51,7 @@ object v2 {
   val createOrOpen_mDefaultDB: ZIO[Blocking, Throwable, Managed[Nothing, DefaultDB]] =
     for {
       env       <- createOrOpenDefaultEnv //likewise createOrOpenDefaultDbi below #improve
-      dbi       =  env.openDbi("DefaultDBI", MDB_CREATE) // #unsafe because this dbi might be closed by txns that abort. using dbi as is after a txn has aborted might throw
+      dbi       =  env.openDbi("DefaultDBI", MDB_CREATE) // #unsafe because this dbi might be closed by txns that abort. using dbi as is after a txn has aborted might throw #hardcode
       mRoTxn    =  Managed.make(UIO(env.txnRead()))(roTxn => UIO{println("roTxn.commit()");roTxn.commit()})
       mRwTxn    =  Managed.make(UIO(env.txnWrite()))(rwTxn => UIO{println("rwTxn.commit()");rwTxn.commit()})
       get       =  (kbb:ByteBuffer) => mRoTxn.use(roTxn => Task(dbi.get(roTxn,kbb)))
