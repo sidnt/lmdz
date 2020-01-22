@@ -1,15 +1,15 @@
-package lmdz
+package lmdz.apis
 
 import java.io.File
-import java.nio.ByteBuffer
+
 import zio._
-import org.lmdbjava._
+import java.nio.ByteBuffer
 
-/** lmdz imports */
-import cfgs._
-import LmdzBatteryPackAccessors._
+import lmdz.cfgs.LmdzBatteryPack
+import lmdz.cfgs.LmdzBatteryPackAccessors.{DefaultDbiFlag, DefaultDbiName, DefaultEnvFlag, DefaultEnvMiBs, DefaultEnvPath}
+import org.lmdbjava.{Dbi, Env, Txn}
 
-package object apis {
+object v1 {
 
   /** lmdbjava doesn't create the environment directory if it's not there
    * this effect will fail if the default directory path isn't already there #unsafe
@@ -29,5 +29,20 @@ package object apis {
     env             <-  IO.effect(Env.open(new File(defaultEnvPath), defaultEnvSize, defaultEnvFlag))
     dbi             <-  IO.effect(env.openDbi(defaultDbiName, defaultDbiFlag))
   } yield (env,dbi)
+
+
+  /** crud apis don't yet abstract over lmdbjava's buffer type
+   * these are currently #hardcoded to ByteBuffer
+   * #todo we'll need appropriate type bounds to introduce that type parameter */
+
+  /** Dbi.put() internally begins and commits a transaction (Txn). */
+  def put(vlu:ByteBuffer, inDbi:Dbi[ByteBuffer], atKey: ByteBuffer): Task[Unit] =
+    IO.effect(inDbi.put(atKey,vlu))
+
+  def get(atKey:ByteBuffer, fromDbi:Dbi[ByteBuffer], within:Txn[ByteBuffer]): Task[ByteBuffer] =
+    IO.effect(fromDbi.get(within, atKey))
+
+  def delete(fromDbi:Dbi[ByteBuffer], atKey:ByteBuffer): Task[Boolean] =
+    IO.effect(fromDbi.delete(atKey))
 
 }
