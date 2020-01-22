@@ -27,6 +27,9 @@ object v2 {
                               put0: (ByteBuffer, ByteBuffer) => ZIO[Any, Throwable, Boolean],
                               del0: ByteBuffer => ZIO[Any, Throwable, Boolean]
                               ) {
+    /** interesting. those who follow an invocation of get in an IDE will get here
+     * and will not get the implementation of the method.
+     * where's the implementation? */
     def get(kbb:ByteBuffer) = get0(kbb)
     def put(kbb:ByteBuffer, vbb:ByteBuffer) = put0(kbb,vbb)
     def del(kbb:ByteBuffer) = del0(kbb)
