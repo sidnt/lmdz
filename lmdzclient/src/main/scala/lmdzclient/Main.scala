@@ -8,7 +8,8 @@ object Main extends App {
 
   override def run(args: List[String]): ZIO[zio.ZEnv, Nothing, Int] =
 //    App1.eg1
-    App2.eg1
+//    App2.eg1
+    App2.eg1b
       .fold( (f: Any) => {println(f.toString);1}, (s:Any) => {println(s.toString);0})
 
 }

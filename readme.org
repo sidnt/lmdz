@@ -8,3 +8,5 @@ tags sprinkled in source code
 #untested
 #hardcoded
 #arbitrary
+#partialfx
+#unnecessary

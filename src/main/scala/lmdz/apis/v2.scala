@@ -69,4 +69,10 @@ object v2 {
    * so we protect ourselves from the clients running such an effect concurrently.
    * even if they run, we can return a Ref to that global instance. */
 
+  type DbUse = DefaultDB => ZIO[console.Console, Throwable, Unit]
+  val managedUse = (dbu:DbUse) => for {
+    m <- createOrOpen_mDefaultDB
+    _ <- m.use(dbu)
+  } yield ()
+
 }
