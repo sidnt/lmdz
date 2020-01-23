@@ -8,7 +8,8 @@ lazy val lmdz = (project in file("."))
     name := "lmdz",
     libraryDependencies ++= Seq(
       zio,
-      lmdb4j
+      lmdb4j,
+      zioNio
     )
   )
 
